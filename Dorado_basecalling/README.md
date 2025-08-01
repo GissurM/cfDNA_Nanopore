@@ -9,5 +9,6 @@ It's also possible to finish each step separately. This pipeline is recommended 
 ## KEEP IN MIND ONLY THE "Dorado basecall" COMMAND NEEDS TO RUN IN A GPU IF PERFORMING SEPARATELY RUN THE OTHER COMMANDS IN A CPU ENVIRONMENT UNLESS YOU HAVE A POWERFUL GPU READILY AVAILABLE.
 
 A downloadable Dorado executable can be found here: https://github.com/nanoporetech/dorado
-A downloadable version of all genome mentioned above can be found here: https://hgdownload.soe.ucsc.edu/downloads.html
+
+A downloadable version of all genomes mentioned above can be found here: https://hgdownload.soe.ucsc.edu/downloads.html
 (When downloading ref. genomes from USCS keep in mind you will be receiveing tar.gz files which are best to unseal using the gunzip command in a Linux environment. If on windows you can use Ubuntu/WSL. Once unzipped the fasta files in the directory are readily accessible in all systems.)
