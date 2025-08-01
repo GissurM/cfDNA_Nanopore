@@ -33,9 +33,9 @@ time cp -rf /path/to/your/fast5/files $tdir/.
 time cp -rf /path/to/your/reference/fasta $tdir/.
 
 # Execute Dorado commands
-time dorado-0.9.1-linux-x64/bin/dorado basecaller sup@v5.0.0 --kit-name your-kit-name name-of-pod5-directory --modified-bases 5mCG_5hmCG -r --no-trim -v --device cuda:all > $tdir/myAoutputfiles1-12/FC1-12Goutput.bam # When specifying kit name make sure you use "-" instead of "_" if your kit name has a _ in it
+time dorado-0.9.1-linux-x64/bin/dorado basecaller sup@v5.0.0 --kit-name "your-kit-name" "path-to-pod5-directory" --modified-bases 5mCG_5hmCG -r --no-trim -v --device cuda:all > $tdir/myAoutputfiles1-12/FC1-12Goutput.bam # When specifying kit name make sure you use "-" instead of "_" if your kit name has a _ in it
  
-time dorado-0.9.1-linux-x64/bin/dorado demux --kit-name your-kit-name $tdir/myAoutputfiles1-12/FC1-12Goutput.bam --output-dir $tdir/outputdemux1-12 -v # Don't run --no-trim barcodes unnecessary after this point and get in the way of true size analysis of cfDNA
+time dorado-0.9.1-linux-x64/bin/dorado demux --kit-name "your-kit-name" $tdir/myAoutputfiles1-12/FC1-12Goutput.bam --output-dir $tdir/outputdemux1-12 -v # Don't run --no-trim barcodes unnecessary after this point and get in the way of true size analysis of cfDNA
  
 time dorado-0.9.1-linux-x64/bin/dorado aligner chm13v2.0_unmasked.fa $tdir/outputdemux1-12 -r --output-dir $tdir/myAoutputfiles1-12/outputAdemux1-12 -v
 # After the job is completed make sure to copy the output to your submit directory.
