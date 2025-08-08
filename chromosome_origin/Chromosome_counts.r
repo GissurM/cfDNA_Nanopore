@@ -11,21 +11,31 @@ for (bam_file in bam_files) {
     # Extract a unique identifier from the file name (use basename without extension)
     barcode <- tools::file_path_sans_ext(basename(bam_file))
 
-    # Convert Windows path to WSL/Linux path
-    linux_path <- system(paste("wsl wslpath", shQuote(bam_file)), intern = TRUE)
-
-    # Construct the samtools command to directly count chromosomes
-    command <- paste("wsl samtools view", shQuote(linux_path), "| awk '{print $3}' | sort | uniq -c")
-
-    # Execute the command and capture the output
-    output <- system(command, intern = TRUE)
-
-    # Parse the output to create a data frame with separate columns for Chromosome and Count
-    chromosome_counts <- do.call(rbind, lapply(output, function(line) {
-        parts <- strsplit(line, " ")[[1]]
-        parts <- parts[parts != ""]  # Remove empty strings
-        data.frame(Chromosome = parts[2], Count = as.integer(parts[1]), stringsAsFactors = FALSE)
-    }))
+    # Read BAM file using Rsamtools
+    cat("Processing file:", basename(bam_file), "\n")
+    
+    # Open BAM file
+    bf <- BamFile(bam_file)
+    
+    # Read all alignments and extract chromosome information
+    param <- ScanBamParam(what = "rname")
+    bam_data <- scanBam(bf, param = param)
+    
+    # Extract chromosome names (rname = reference name)
+    chromosomes <- bam_data[[1]]$rname
+    
+    # Remove NA values (unmapped reads)
+    chromosomes <- chromosomes[!is.na(chromosomes)]
+    
+    # Count occurrences of each chromosome
+    chromosome_table <- table(chromosomes)
+    
+    # Convert to data frame
+    chromosome_counts <- data.frame(
+        Chromosome = names(chromosome_table),
+        Count = as.integer(chromosome_table),
+        stringsAsFactors = FALSE
+    )
 
     # Add a column for the percentage of total counts
     total_count <- sum(chromosome_counts$Count)
@@ -55,15 +65,15 @@ for (bam_file in bam_files) {
     plot <- ggplot(chromosome_counts, aes(x = Chromosome, y = Count)) +
         geom_bar(stat = "identity", fill = "steelblue", width = 0.8) +
         theme_minimal() +
-        labs(title = paste("cfDNA Reads per Chromosome - Barcode", barcode), 
+        labs(title = paste("cfDNA Reads per Chromosome -", barcode), 
              x = "Chromosome", y = "Read Count") +
         theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
-    # Save the plot to the directory with the name chromosome_counts_barcodeXX.png
-    output_file <- file.path(bam_dir, paste0("chromosome_counts_barcode", barcode, ".png"))
+    # Save the plot to the directory with the filename-based identifier
+    output_file <- file.path(bam_dir, paste0("chromosome_counts_", barcode, ".png"))
     ggsave(output_file, plot)
 
-    # Save a table showing the total amount of each header present in the BAM file
-    output_table_file <- file.path(bam_dir, paste0("chromosome_counts_table_barcode", barcode, ".csv"))
+    # Save a table showing the total amount of each chromosome present in the BAM file
+    output_table_file <- file.path(bam_dir, paste0("chromosome_counts_table_", barcode, ".csv"))
     write.table(chromosome_counts, output_table_file, row.names = FALSE, sep = ";", dec = ",", col.names = TRUE, quote = FALSE)
 }
