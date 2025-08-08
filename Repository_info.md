@@ -1,7 +1,7 @@
 # Repository info 
 This repository is a chronicle of coding methods i used to perform multivariant analysis on Oxford Nanopore Technologies data.
 I used several tools from other publications and will link them when necessary, I take no credit for the work done to create those tools and will not post any codes or files retrieved from such 
-sources unless i have directly edited them for one reason or another. Any such codes will be correctly credited and i will write a short explanation of what specifically i changed. 
+sources. Any such codes will be correctly credited and i will preface if i made any edits to the code and why i made them. 
 I will however post any unique wrapper scripts I created mostly to create a convenient means of understanding how such a wrapper script can be made. If any piece of code or data is 
 not attributed to anyone specific it can be assumed to be my own work.
 
@@ -16,3 +16,5 @@ I hope this resource will be of use to any aspiring Oxford Nanopore Technologies
 All original resources posted here are non-licensed and you should therefore feel free to use these codes for any purpose you desire and change them how you like. 
 However any 3rd party tools, packages or datasets mentioned and used might have their own licenses and it is the readers own responsibility to get acquinted with any such licenses and to avoid any legal trouble.
 Again it is not my intention to claim any credit for work i did not perform and if you notice any conflicts with this statement within this repository please get in contact with me and i will mend it post-haste. 
+
+# By: Gissur Máni Ísleifsson
