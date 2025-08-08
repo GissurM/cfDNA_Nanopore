@@ -7,5 +7,6 @@ There are only really 3 ways to use this code which i think are actually benefic
 Otherwise this code is pretty simple to use and only requires a couple of R libraries to be installed (listed under dependencies) the code can be run locally on any computer with decent specs and is optimized slightly for lower end hardware.
 ## Dependencies
 - R version 4.5.0 (This version is tested others may work just as well)
-- Rsamtools (Should not require a samtools installation on path)
-- ggplot2
+- R libraries:
+   - Rsamtools (Should not require a samtools installation on path)
+   - ggplot2
