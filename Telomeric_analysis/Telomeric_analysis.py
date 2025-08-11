@@ -2,7 +2,6 @@
 """
 Nanopore BAM telomeric analysis script for cfDNA.
 Analyzes multiple BAM files from a directory and calculates telomeric ratios.
-Groups barcodes into two categories and outputs results to CSV.
 Requires samtools to be available in the system PATH.
 """
 
@@ -22,10 +21,6 @@ import argparse
 # Hardcoded paths - modify these as needed
 # BAM_DIRECTORY = "/mnt/c/Users/gissu/Documents/STRBasecall1-24"  # Now passed as argument
 # OUTPUT_CSV = "/mnt/c/Users/gissu/Documents/STRBasecall1-24/STRTelomere.csv"  # Now constructed from output directory
-
-# Barcode grouping
-GROUP1_BARCODES = [1, 2, 3, 4, 5, 6, 13, 14, 15, 16, 17, 18]  # Group 1: barcodes 1-6, 13-18
-GROUP2_BARCODES = [7, 8, 9, 10, 11, 12, 19, 20, 21, 22, 23, 24]  # Group 2: barcodes 7-12, 19-24
 
 # Telomeric sequence analysis parameters
 TELOMERE_MOTIF = "TTAGGG"
@@ -611,28 +606,6 @@ def analyze_single_bam(bam_file):
             'detailed_results': []
         }
 
-def calculate_group_stats(group_results):
-    """Calculate combined statistics for a group of samples."""
-    if not group_results:
-        return {'total_reads': 0, 'telomeric_reads': 0, 'telomeric_ratio': 0, 'telomeric_percentage': 0}
-    
-    total_reads = sum(result['total_reads'] for result in group_results)
-    total_telomeric = sum(result['telomeric_reads'] for result in group_results)
-    
-    if total_reads > 0:
-        ratio = total_telomeric / total_reads
-        percentage = ratio * 100
-    else:
-        ratio = 0
-        percentage = 0
-    
-    return {
-        'total_reads': total_reads,
-        'telomeric_reads': total_telomeric,
-        'telomeric_ratio': ratio,
-        'telomeric_percentage': percentage
-    }
-
 def parse_arguments():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(
@@ -663,7 +636,7 @@ Examples:
                         help='Run telomere detection tests and exit')
     
     return parser.parse_args()
-# extensive test function. Try running it on your system before further analysis. 
+
 def test_telomere_detection():
     """Comprehensive test function with 20 positive and 30 negative controls for long cfDNA analysis (≥150bp)."""
     # Set up test parameters for long sequences
@@ -911,48 +884,28 @@ def main():
     
     # Analyze each BAM file
     all_results = []
-    group1_results = []
-    group2_results = []
-    
+
     start_time = time.time()
-    
+
     for i, bam_file in enumerate(bam_files, 1):
         print(f"[{i}/{len(bam_files)}] Processing file...")
         result = analyze_single_bam(bam_file)
         all_results.append(result)
         
-        # Determine barcode and assign to group
+        # Extract barcode for identification (optional)
         barcode = extract_barcode_from_filename(result['filename'])
         if barcode:
             result['barcode'] = barcode
-            if barcode in GROUP1_BARCODES:
-                group1_results.append(result)
-                result['group'] = 'Group1'
-            elif barcode in GROUP2_BARCODES:
-                group2_results.append(result)
-                result['group'] = 'Group2'
-            else:
-                result['group'] = 'Other'
         else:
             result['barcode'] = 'Unknown'
-            result['group'] = 'Unknown'
         
         print(f"  Results: {result['telomeric_reads']:,}/{result['total_reads']:,} reads ({result['telomeric_percentage']:.4f}%)")
         print()
-    
+
     elapsed_time = time.time() - start_time
     print(f"Total processing time: {elapsed_time:.2f} seconds")
     print()
-    
-    # Calculate group statistics
-    group1_stats = calculate_group_stats(group1_results)
-    group2_stats = calculate_group_stats(group2_results)
-    
-    print("Group Statistics:")
-    print(f"Group 1 (barcodes 1-6, 13-18): {group1_stats['telomeric_percentage']:.4f}% telomeric")
-    print(f"Group 2 (barcodes 7-12, 19-24): {group2_stats['telomeric_percentage']:.4f}% telomeric")
-    print()
-    
+
     # Write results to CSV
     csv_file = output_csv
     
@@ -962,37 +915,20 @@ def main():
         
         # Write header
         writer.writerow([
-            'Filename', 'Barcode', 'Group', 'Total_Reads', 'Telomeric_Reads', 
-            'Telomeric_Ratio', 'Telomeric_Percentage',
-            'Group1_Total_Reads', 'Group1_Telomeric_Reads', 'Group1_Telomeric_Percentage',
-            'Group2_Total_Reads', 'Group2_Telomeric_Reads', 'Group2_Telomeric_Percentage'
+            'Filename', 'Barcode', 'Total_Reads', 'Telomeric_Reads', 
+            'Telomeric_Ratio', 'Telomeric_Percentage'
         ])
         
         # Write individual results
-        for i, result in enumerate(all_results):
+        for result in all_results:
             row = [
                 result['filename'],
                 result.get('barcode', 'Unknown'),
-                result.get('group', 'Unknown'),
                 result['total_reads'],
                 result['telomeric_reads'],
                 f"{result['telomeric_ratio']:.6f}",
                 f"{result['telomeric_percentage']:.4f}%"
             ]
-            
-            # Add group statistics to first row only
-            if i == 0:
-                row.extend([
-                    group1_stats['total_reads'],
-                    group1_stats['telomeric_reads'],
-                    f"{group1_stats['telomeric_percentage']:.4f}%",
-                    group2_stats['total_reads'],
-                    group2_stats['telomeric_reads'],
-                    f"{group2_stats['telomeric_percentage']:.4f}%"
-                ])
-            else:
-                row.extend(['', '', '', '', '', ''])
-            
             writer.writerow(row)
     
     # Write detailed results CSV
@@ -1000,7 +936,7 @@ def main():
     with open(detailed_csv, 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow([
-            'Filename', 'Barcode', 'Group', 'Read_Name', 'Read_Length', 
+            'Filename', 'Barcode', 'Read_Name', 'Read_Length', 
             'Telomeric_End', 'Telomeric_Length', 'Motif_Count', 'Motif_Type'
         ])
         
@@ -1009,7 +945,6 @@ def main():
                 writer.writerow([
                     result['filename'],
                     result.get('barcode', 'Unknown'),
-                    result.get('group', 'Unknown'),
                     detail['read_name'],
                     detail['length'],
                     detail['telomeric_end'],
