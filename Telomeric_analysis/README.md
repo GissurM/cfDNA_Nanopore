@@ -22,6 +22,6 @@ It's not too difficult to set up and i will also post a wrapper which should all
 
 ## Dependencies
 - Python 3.9 (tested)
-- Samtools (recommended may not be necessary)
+- Samtools (Needs to be available on system path, if possible running through module library is  recommended)
 - Python packages:
     - Pysam
