@@ -18,7 +18,8 @@ Wgbs_tools has the following dependencies (also listed at the link):
 
 You then need to set up the code onto your path using the setup.py code that you should get in the file you git clone from the website.
 When you run the setup.py code using Python make sure to do so in a virtual environment with all the listed dependencies present otherwise it will not work, running it on linux or Mac is preferred as there are no easy ways to set up Samtools / bedtools on windows. 
-# If the setup.py code gives error messages or complaints DO NOT make changes to the setup.py code or any other parts of wgbs_tools as it is unlikely to fix the issue. Rather uninstall all traces of wgbs_tools and then try again in the correct environment! Am speaking from personal experience here.
+
+## If the setup.py code gives error messages or complaints DO NOT make changes to the setup.py code or any other parts of wgbs_tools as it is unlikely to fix the issue. Rather uninstall all traces of wgbs_tools and then try again in the correct environment! Am speaking from personal experience here.
 
 If the above statement sounds harsh that's because i altered the setup.py code and got the wgbstools command onto path but kept running into issues with individual parts of the wgbstools package and it took hours to sort through it all. I then gave up and deleted everything only for it all to work perfectly after running setup.py, if on windows make sure to use WSL using MSYS2 will only cause problems.
 Anyways once you have gotten the wgbs_tools command onto your path the hard part is over. Then you can use bam2pat to transform bam files to pat.gz files. 
