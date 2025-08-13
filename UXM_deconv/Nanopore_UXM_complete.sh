@@ -13,9 +13,9 @@ UXM_DIR="/home/gissu/UXM_deconv"
 OUTPUT_DIR="nanopore_uxm_results_$(date +%Y%m%d_%H%M%S)"
 
 # Nanopore-specific parameters
-DEFAULT_MIN_CPGS=5
+DEFAULT_MIN_CPGS=1      # Lowered for Nanopore - more lenient for longer reads
 DEFAULT_MIN_MAPQ=10
-DEFAULT_NP_THRESH=0.67  # Nanopore probability threshold
+DEFAULT_NP_THRESH=0.3  # Nanopore probability threshold
 DEFAULT_TRIM_ENDS=27    # Trim 27nt from read ends as recommended
 
 # Function to show usage
@@ -319,15 +319,34 @@ for input_file in "${ALL_INPUT_FILES[@]}"; do
         
         echo "  Converting to PAT format with Nanopore-specific settings..."
         
+        # Check if BAM contains Nanopore methylation tags
+        has_meth_tags=$(samtools view "$abs_path" | head -1000 | grep -c "MM:" || echo "0")
+        
+        if [[ "$has_meth_tags" -eq 0 ]]; then
+            echo "  ⚠️  WARNING: No MM/ML methylation tags found in BAM file"
+            echo "     This suggests methylation tags were lost during alignment"
+            echo "     Switching to bisulfite-compatible mode (not ideal for Nanopore)"
+            USE_NANOPORE_MODE=0
+        else
+            echo "  ✅ Methylation tags detected, using full Nanopore mode"
+            USE_NANOPORE_MODE=1
+        fi
+        
         # Ensure output directory exists for this specific conversion
         mkdir -p "$OUTPUT_DIR"
         
-        # Build Nanopore-specific bam2pat command
+        # Build bam2pat command based on available data
         bam2pat_cmd="wgbstools bam2pat"
         bam2pat_cmd+=" --min_cpg $MIN_CPGS"
         bam2pat_cmd+=" -q $MIN_MAPQ"
-        bam2pat_cmd+=" --nanopore"  # Enable Nanopore mode
-        bam2pat_cmd+=" --np_thresh $NP_THRESH"
+        
+        if [[ "$USE_NANOPORE_MODE" -eq 1 ]]; then
+            bam2pat_cmd+=" --nanopore"  # Enable Nanopore mode
+            bam2pat_cmd+=" --np_thresh $NP_THRESH"
+        else
+            echo "     Using bisulfite-compatible mode due to missing methylation tags"
+        fi
+        
         bam2pat_cmd+=" -f"  # Force overwrite existing files
         
         # Apply read-end trimming unless disabled
