@@ -26,7 +26,7 @@ import argparse
 TELOMERE_MOTIF = "TTAGGG"
 TELOMERE_MOTIF_RC = "CCCTAA"  # Reverse complement
 MIN_TELOMERE_LENGTH = 36  # (6 motifs minimum)
-MAX_ERROR_RATE = 0.08  # Reduced from 10% to 8% error rate tolerance for nanopore
+MAX_ERROR_RATE = 0.08  # 8% error rate tolerance for nanopore
 MIN_MOTIF_REPEATS = 4  # Minimum motif repeats required
 MAX_MISMATCHES_PER_MOTIF = 1
 
