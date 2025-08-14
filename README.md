@@ -10,7 +10,7 @@ This is mostly meant to be a proof of my own understanding when i turn in my mas
 Therefore i will be explaining what each code does and how to make it work for a user in more detail than one might usually expect in a github repository, for instance I might occasionally highlight specific problems i faced and how i bypassed them. I will also include a list of dependencies in the readme file found in each directory, for those uninitiated a dependency is a 3rd party tool or package that will be utilized by the code and are therefore vital for the code to function.
 Any experienced coders or Nanopore analysts likely will not need to read these details as again the codes i have created are meant to be simple and accessible in nature.
 
-I hope this resource will be of use to any aspiring Oxford Nanopore Technologies data analysts. 
+I hope this resource will be of use to any aspiring Oxford Nanopore Technologies data analysts. I use AI quite a bit as a coding assistant but that doesn't mean that i haven't gone through significant trial and error while making this work. 
 
 ## short legal disclaimer
 All original resources posted here are non-licensed and you should therefore feel free to use these codes for any purpose you desire and change them how you like. 
