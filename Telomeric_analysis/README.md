@@ -1,4 +1,6 @@
 # Telomeric analysis from cfDNA
+## Disclaimer: While I believe the logic behind this method is mostly sound it seems to be inaccurate as of now. Analyze results with a grain of salt. There is a lack of pure telomeric cfDNA threads. This is likely due to there being no unique binding spots for this fragment on the genome. Currently looking for a workaround would rather use aligned data if possible.
+
 This method is created by myself and gives a result in the form of total telomeric DNA % of cfDNA in the blood stream. It is very hard to fact check whether the results of this particular method are correct. 
 The current other methods used to detect similar metrics qPCR/dPCR are not directly translateable as they give metrics such as a T/S ratio which is not directly translatable to a total %. 
 In order to fact check how correct this is i have been comparing results with a previously performed qPCR analysis performed on the samples and checking for similar ratios of results. 
