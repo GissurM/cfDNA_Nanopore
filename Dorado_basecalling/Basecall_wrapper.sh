@@ -28,7 +28,7 @@ cd $tdir
 # Make sure to copy the files you need for the job
 time cp -rf /path/to/your/dorado/executable $tdir/. # Not needed if running a module
 
-time cp -rf /path/to/your/fast5/files $tdir/.
+time cp -rf /path/to/your/fast5-or-pod5/files $tdir/.
 
 time cp -rf /path/to/your/reference/fasta $tdir/.
 
