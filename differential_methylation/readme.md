@@ -13,7 +13,7 @@ It is also possible to control parameters via command line a full possible comma
 **"python analyze_methylation_per_sample.py /path/to/your/bed_dir --output-dir /path/to/your/out_dir --min-cpgs x --min-samples XX --permutations XXXXX"**
 A bed_dir path is necessary needs to be a single path that leads to all bed files of both groups. Grouping strategy must be defined in script, --output dir is not needed but is recommended, othewise output will go to a default directory of ./methylation_results. 
 
-Dependencies for this script are: pands, numpy, matplotlib, seaborn, scipy and requests. All python packages install with pip or bioconda if needed.
+Dependencies for this script are: pands, numpy, matplotlib and requests. These are all python packages install with pip or bioconda if needed.
 
 Currently code is not fully tested am uploading it here simply for my own convenience
 
