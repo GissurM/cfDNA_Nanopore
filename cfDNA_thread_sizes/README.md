@@ -20,8 +20,8 @@ therefore the most valuable data to be gathered here is the average size of cfDN
 Sometimes a fourth peak is visible possibly representing a tetranucleosomal peak which is a known and interesting phenomenon. 
 
 ## Dependencies
-- R studios - version 4.5.0 (this version is tested others may work as well) 
+- R studios - version 4.3.3 (this version is tested others may work as well) 
 - R packages:
-    - Rsamtools
-    - ggplot
-    - dplyr 
+    - Rsamtools (v2.18.0)
+    - ggplot (v4.0.2)
+    - dplyr  (v1.2.0)
