@@ -7,6 +7,7 @@ Creates publication-quality figures from a merged telomere+metadata CSV.
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -22,13 +23,23 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Create comprehensive telomere visualizations from merged CSV")
     parser.add_argument(
         "--input-csv",
-        default="/mnt/c/Users/gissu/Documents/hg38_1-24/TelSeq_Results/telomere_with_metadata.csv",
+        default="./results/telomere_with_metadata.csv",
         help="Merged telomere+metadata CSV",
     )
     parser.add_argument(
         "--output-png",
-        default="/mnt/c/Users/gissu/Documents/hg38_1-24/TelSeq_Results/comprehensive_telomere_analysis.png",
+        default="./results/comprehensive_telomere_analysis.png",
         help="Output figure path",
+    )
+    parser.add_argument(
+        "--output-summary-csv",
+        default="./results/comprehensive_telomere_summary.csv",
+        help="Optional summary statistics CSV path",
+    )
+    parser.add_argument(
+        "--no-show",
+        action="store_true",
+        help="Do not open an interactive matplotlib window (recommended for servers/CI)",
     )
     parser.add_argument("--group-column", default="Group", help="Group column name")
     parser.add_argument("--length-column", default="Telomere_Length_Estimate", help="Telomere length column")
@@ -41,11 +52,25 @@ def build_arg_parser() -> argparse.ArgumentParser:
 def main() -> None:
     args = build_arg_parser().parse_args()
 
-    df = pd.read_csv(args.input_csv)
+    input_csv = Path(args.input_csv)
+    output_png = Path(args.output_png)
+    output_summary_csv = Path(args.output_summary_csv) if args.output_summary_csv else None
+
+    if not input_csv.exists():
+        raise FileNotFoundError(f"Input CSV not found: {input_csv}")
+
+    output_png.parent.mkdir(parents=True, exist_ok=True)
+    if output_summary_csv is not None:
+        output_summary_csv.parent.mkdir(parents=True, exist_ok=True)
+
+    df = pd.read_csv(input_csv)
     required = [args.group_column, args.length_column, args.age_column, args.gender_column, args.bmi_column]
     missing = [c for c in required if c not in df.columns]
     if missing:
         raise ValueError(f"Input CSV missing required columns: {missing}")
+
+    if len(df) < 3:
+        raise RuntimeError("Need at least 3 samples for this visualization.")
 
     plt.style.use('default')
     sns.set_palette("husl")
@@ -53,6 +78,8 @@ def main() -> None:
     plt.rcParams['savefig.dpi'] = 300
 
     groups = sorted(df[args.group_column].dropna().unique().tolist())
+    if len(groups) < 1:
+        raise RuntimeError("No groups found in the selected group column.")
     palette = dict(zip(groups, sns.color_palette("tab10", n_colors=max(1, len(groups)))))
 
     fig = plt.figure(figsize=(20, 16))
@@ -173,7 +200,7 @@ def main() -> None:
     # Plot 12: Statistical summary
     ax12 = plt.subplot(3, 4, 12)
     ax12.axis('off')
-    overall_corr, overall_p = stats.pearsonr(df[args.age_column], df[args.length_column])
+    overall_corr, overall_p = stats.pearsonr(df[args.age_column], df[args.length_column]) if len(df) > 2 else (np.nan, np.nan)
     summary_lines = [
         'Statistical Summary:',
         '',
@@ -187,12 +214,33 @@ def main() -> None:
         summary_lines.append(f'{group}: {sub.mean():.2f} ± {sub.std():.2f} (n={len(sub)})')
     ax12.text(0.1, 0.9, "\n".join(summary_lines), transform=ax12.transAxes, fontsize=10, verticalalignment='top', fontfamily='monospace')
 
+    if output_summary_csv is not None:
+        summary_rows = []
+        for group in groups:
+            sub = df[df[args.group_column] == group]
+            summary_rows.append(
+                {
+                    "group": group,
+                    "n": int(len(sub)),
+                    "telomere_mean": float(sub[args.length_column].mean()),
+                    "telomere_sd": float(sub[args.length_column].std()),
+                    "age_mean": float(sub[args.age_column].mean()),
+                    "bmi_mean": float(sub[args.bmi_column].mean()),
+                }
+            )
+        pd.DataFrame(summary_rows).to_csv(output_summary_csv, index=False)
+
     plt.tight_layout()
-    plt.savefig(args.output_png, dpi=300, bbox_inches='tight')
-    plt.show()
+    plt.savefig(output_png, dpi=300, bbox_inches='tight')
+    if args.no_show:
+        plt.close()
+    else:
+        plt.show()
 
     print('Comprehensive visualization completed!')
-    print(f'Saved as: {args.output_png}')
+    print(f'Saved as: {output_png}')
+    if output_summary_csv is not None:
+        print(f'Summary CSV: {output_summary_csv}')
 
 
 if __name__ == "__main__":
