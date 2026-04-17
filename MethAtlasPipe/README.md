@@ -28,6 +28,6 @@ This entire pipeline aside from Dorado and modkit to start does not require high
 - Deconvolve.py (this is a program that should be included in the meth_atlas directory you git cloned)
 - "Infinium_HumanMethylation450k_manifests" (either hg38, hg19 or custom)
 - Python packages:
-    - pandas
-    - numpy
+    - pandas (v2.2.3) 
+    - numpy (v2.0.2)
 
