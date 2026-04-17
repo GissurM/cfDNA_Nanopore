@@ -22,17 +22,17 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Merge TelSeq summary with metadata and report covariate diagnostics")
     parser.add_argument(
         "--telomere-csv",
-        default="/mnt/c/Users/gissu/Documents/hg38_1-24/TelSeq_Results/telseq_correct_summary.csv",
+        default="./results/telseq_correct_summary.csv",
         help="Path to telomere summary CSV",
     )
     parser.add_argument(
         "--metadata-csv",
-        default="/mnt/c/Users/gissu/Documents/metadata_age_gender.csv",
+        default="./data/metadata_age_gender.csv",
         help="Path to metadata CSV",
     )
     parser.add_argument(
         "--output-csv",
-        default="/mnt/c/Users/gissu/Documents/hg38_1-24/TelSeq_Results/telomere_with_metadata.csv",
+        default="./results/telomere_with_metadata.csv",
         help="Output merged CSV path",
     )
     parser.add_argument(
@@ -62,7 +62,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--visualization-script-path",
-        default="/home/gissu/comprehensive_telomere_visualization.py",
+        default="./comprehensive_telomere_visualization.py",
         help="Path for generated visualization script",
     )
     return parser
@@ -311,7 +311,7 @@ from sklearn.linear_model import LinearRegression
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Create comprehensive telomere visualization from merged CSV")
     p.add_argument("--input-csv", default="{args.output_csv}")
-    p.add_argument("--output-png", default="/mnt/c/Users/gissu/Documents/hg38_1-24/TelSeq_Results/comprehensive_telomere_analysis.png")
+    p.add_argument("--output-png", default="./results/comprehensive_telomere_analysis.png")
     p.add_argument("--group-column", default="{args.group_column}")
     p.add_argument("--length-column", default="{args.length_column}")
     p.add_argument("--age-column", default="{args.age_column}")
