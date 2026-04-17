@@ -61,12 +61,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Parse TelSeq output into analysis-ready CSV")
     parser.add_argument(
         "--input-file",
-        default="/mnt/c/Users/gissu/Documents/hg38_1-24/TelSeq_Results/all_samples_telomere_results.txt",
+        default="./data/all_samples_telomere_results.txt",
         help="TelSeq output text file path",
     )
     parser.add_argument(
         "--output-csv",
-        default="/mnt/c/Users/gissu/Documents/hg38_1-24/TelSeq_Results/telseq_correct_summary.csv",
+        default="./results/telseq_correct_summary.csv",
         help="Output summary CSV path",
     )
     parser.add_argument(
