@@ -1,4 +1,3 @@
-library(vroom)
 library(data.table)
 
 chr_list <- commandArgs(trailingOnly=TRUE)[1]
