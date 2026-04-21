@@ -12,8 +12,10 @@ Python 3.9+
   - pandas (v2.2.3)
   - numpy (v2.0.2)
   - pysam (v0.23.0)
+
 R (v4.3.3)
   - data.table (v1.18.2.1)
+
 Used for statistics scripts only
   - scipy (v1.13.1)
   - sklearn (v1.6.1)
