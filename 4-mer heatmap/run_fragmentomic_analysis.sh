@@ -5,12 +5,12 @@
 
 set -e
 
-SCRIPT_DIR="/home/gissu/heatmap_gen"
-BAM_DIR="/mnt/c/Users/gissu/Documents/SingleplexBAMhg38/bam_pass"
-REFERENCE="/mnt/c/Users/gissu/Documents/hg38/hg38.fa"
-OUTPUT_DIR="$SCRIPT_DIR/fragmentomics_full2"
-RESULTS_DIR="$SCRIPT_DIR/results2"
-CHR_LIST="$SCRIPT_DIR/chromosomes2.txt"
+SCRIPT_DIR="/location/of/this/script"
+BAM_DIR="/path/to/your/bam/dir"
+REFERENCE="/path/to/your/reference/fasta"
+OUTPUT_DIR="$SCRIPT_DIR/fragmentomics_full"
+RESULTS_DIR="$SCRIPT_DIR/results"
+CHR_LIST="$SCRIPT_DIR/chromosomes.txt"
 
 cd $SCRIPT_DIR
 
