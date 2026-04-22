@@ -8,11 +8,10 @@ Chromosome_Histogram.py extracts the chromosome info and creates a histogram. To
 For a more detailed output run Chromosome_counts.r set the bam_dir and bam_files functions in the script to match your files than run the script with R. This script outputs a .csv for each sample which can be used with the chr_statistics.py script to get visual and statistics output. Set up the chr_statistics.py script to work in your environment and then run it using python. None of these scripts require high processing power but can take a while to run. 
 
 ## Dependencies
-R version 4.5.0 (This version is tested others may work just as well)
-R libraries:
+- R version 4.5.0 (This version is tested others may work just as well)
    - Rsamtools (v2.18.0)
    - ggplot2 (v4.0.2)
-Python (v3.9+)
+- Python (v3.9+)
    - numpy (v2.0.2)
    - pandas (v2.2.3)
    - scipy (v1.13.1)
