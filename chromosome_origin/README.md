@@ -10,8 +10,8 @@ For a more detailed output run Chromosome_counts.r set the bam_dir and bam_files
 ## Dependencies
 R version 4.5.0 (This version is tested others may work just as well)
 R libraries:
-   - Rsamtools 
-   - ggplot2
+   - Rsamtools (v2.18.0)
+   - ggplot2 (v4.0.2)
 Python (v3.9+)
    - numpy (v2.0.2)
    - pandas (v2.2.3)
