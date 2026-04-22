@@ -10,4 +10,5 @@ Once run_ichorCNA.py has been set up simply run it with "python run_ichorCNA.py"
   - GenomeInfoDb (v1.38.8)
   - optparse (v1.7.5)
   - HMMcopy (v1.44.0)
-Samtools (v1.19.2)
+  - GenomicRanges (v1.54.1)
+-Samtools (v1.19.2)
