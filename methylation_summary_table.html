@@ -1,0 +1,402 @@
+<html><head><style>table {border-collapse: collapse} th, td {border: 1px solid #999; padding: 6px}</style></head><body><h2>Per-Sample Three-Group Methylation Analysis with Permutation Testing</h2><p>Min CpGs: 5 | Min Samples: 3 | Permutations: 100,000</p><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Gene</th>
+      <th>Chromosome</th>
+      <th>Neutrophil Ref (%)</th>
+      <th>Qualified Groups</th>
+      <th>Control Mean (%)</th>
+      <th>Control SD</th>
+      <th>Control N</th>
+      <th>Control Qualified</th>
+      <th>Coronary Mean (%)</th>
+      <th>Coronary SD</th>
+      <th>Coronary N</th>
+      <th>Coronary Qualified</th>
+      <th>Recovery Mean (%)</th>
+      <th>Recovery SD</th>
+      <th>Recovery N</th>
+      <th>Recovery Qualified</th>
+      <th>Control vs Coronary Diff (%)</th>
+      <th>Control vs Coronary P-value</th>
+      <th>Control vs Coronary FDR P-value</th>
+      <th>Control vs Coronary Significant</th>
+      <th>Control vs Coronary Status</th>
+      <th>Control vs Recovery Diff (%)</th>
+      <th>Control vs Recovery P-value</th>
+      <th>Control vs Recovery FDR P-value</th>
+      <th>Control vs Recovery Significant</th>
+      <th>Control vs Recovery Status</th>
+      <th>Coronary vs Recovery Diff (%)</th>
+      <th>Coronary vs Recovery P-value</th>
+      <th>Coronary vs Recovery FDR P-value</th>
+      <th>Coronary vs Recovery Significant</th>
+      <th>Coronary vs Recovery Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ACTB</td>
+      <td>chr7</td>
+      <td>nan</td>
+      <td>Control, Coronary, Recovery</td>
+      <td>56.69</td>
+      <td>12.03</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>43.12</td>
+      <td>3.98</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>57.62</td>
+      <td>5.50</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>-13.57</td>
+      <td>0.008250</td>
+      <td>0.017000</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN CONTROL *</span></td>
+      <td>0.93</td>
+      <td>0.865431</td>
+      <td>0.865431</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>14.50</td>
+      <td>0.007910</td>
+      <td>0.015400</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN RECOVERY *</span></td>
+    </tr>
+    <tr>
+      <td>AUTS2</td>
+      <td>chr7</td>
+      <td>nan</td>
+      <td>Control, Coronary, Recovery</td>
+      <td>80.99</td>
+      <td>2.86</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>76.50</td>
+      <td>2.56</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>82.02</td>
+      <td>0.31</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>-4.49</td>
+      <td>0.031890</td>
+      <td>0.045557</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN CONTROL *</span></td>
+      <td>1.03</td>
+      <td>0.008590</td>
+      <td>0.085899</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>5.52</td>
+      <td>0.007840</td>
+      <td>0.015400</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN RECOVERY *</span></td>
+    </tr>
+    <tr>
+      <td>CORO6</td>
+      <td>chr17</td>
+      <td>nan</td>
+      <td>Control, Coronary, Recovery</td>
+      <td>35.95</td>
+      <td>19.98</td>
+      <td>4</td>
+      <td>Yes</td>
+      <td>18.23</td>
+      <td>4.39</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>32.01</td>
+      <td>6.13</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>-17.72</td>
+      <td>0.007790</td>
+      <td>0.017000</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN CONTROL *</span></td>
+      <td>-3.94</td>
+      <td>0.683923</td>
+      <td>0.759915</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>13.78</td>
+      <td>0.007620</td>
+      <td>0.015400</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN RECOVERY *</span></td>
+    </tr>
+    <tr>
+      <td>FKBP5</td>
+      <td>chr6</td>
+      <td>nan</td>
+      <td>Control, Coronary, Recovery</td>
+      <td>63.58</td>
+      <td>15.99</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>43.35</td>
+      <td>3.68</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>61.54</td>
+      <td>3.71</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>-20.23</td>
+      <td>0.008500</td>
+      <td>0.017000</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN CONTROL *</span></td>
+      <td>-2.04</td>
+      <td>0.565264</td>
+      <td>0.759915</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>18.20</td>
+      <td>0.008400</td>
+      <td>0.015400</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN RECOVERY *</span></td>
+    </tr>
+    <tr>
+      <td>GUSB</td>
+      <td>chr7</td>
+      <td>nan</td>
+      <td>Control, Coronary, Recovery</td>
+      <td>82.04</td>
+      <td>8.81</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>72.77</td>
+      <td>6.83</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>77.27</td>
+      <td>6.27</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>-9.28</td>
+      <td>0.062809</td>
+      <td>0.078512</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>-4.77</td>
+      <td>0.462985</td>
+      <td>0.759915</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>4.51</td>
+      <td>0.253457</td>
+      <td>0.309781</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+    </tr>
+    <tr>
+      <td>HPRT1</td>
+      <td>chrX</td>
+      <td>nan</td>
+      <td>Control, Coronary, Recovery</td>
+      <td>60.87</td>
+      <td>25.47</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>48.85</td>
+      <td>16.75</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>53.46</td>
+      <td>13.43</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>-12.02</td>
+      <td>0.554894</td>
+      <td>0.554894</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>-7.41</td>
+      <td>0.570214</td>
+      <td>0.759915</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>4.61</td>
+      <td>0.657843</td>
+      <td>0.657843</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+    </tr>
+    <tr>
+      <td>PPIA</td>
+      <td>chr7</td>
+      <td>nan</td>
+      <td>Coronary, Recovery</td>
+      <td>35.26</td>
+      <td>17.19</td>
+      <td>2</td>
+      <td>No</td>
+      <td>19.28</td>
+      <td>8.10</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>28.42</td>
+      <td>9.31</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NOT TESTED</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>NOT TESTED</td>
+      <td>9.14</td>
+      <td>0.135509</td>
+      <td>0.212942</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+    </tr>
+    <tr>
+      <td>RFLNA</td>
+      <td>chr12</td>
+      <td>nan</td>
+      <td>Control, Coronary, Recovery</td>
+      <td>79.78</td>
+      <td>1.59</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>73.42</td>
+      <td>2.16</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>81.09</td>
+      <td>1.13</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>-6.35</td>
+      <td>0.007730</td>
+      <td>0.017000</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN CONTROL *</span></td>
+      <td>1.31</td>
+      <td>0.190598</td>
+      <td>0.573769</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>7.66</td>
+      <td>0.008350</td>
+      <td>0.015400</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN RECOVERY *</span></td>
+    </tr>
+    <tr>
+      <td>RPL13A</td>
+      <td>chr19</td>
+      <td>nan</td>
+      <td>Control, Coronary, Recovery</td>
+      <td>63.96</td>
+      <td>19.82</td>
+      <td>4</td>
+      <td>Yes</td>
+      <td>46.97</td>
+      <td>7.61</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>55.44</td>
+      <td>8.36</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>-16.99</td>
+      <td>0.016480</td>
+      <td>0.027466</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN CONTROL *</span></td>
+      <td>-8.52</td>
+      <td>0.229508</td>
+      <td>0.573769</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>8.47</td>
+      <td>0.159148</td>
+      <td>0.218829</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+    </tr>
+    <tr>
+      <td>RPLP0</td>
+      <td>chr12</td>
+      <td>nan</td>
+      <td>Control, Coronary, Recovery</td>
+      <td>38.24</td>
+      <td>30.91</td>
+      <td>3</td>
+      <td>Yes</td>
+      <td>30.33</td>
+      <td>5.70</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>34.85</td>
+      <td>9.27</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>-7.90</td>
+      <td>0.159608</td>
+      <td>0.177343</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>-3.39</td>
+      <td>0.679403</td>
+      <td>0.759915</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>4.51</td>
+      <td>0.320307</td>
+      <td>0.352337</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+    </tr>
+    <tr>
+      <td>TBP</td>
+      <td>chr6</td>
+      <td>nan</td>
+      <td>Control, Coronary, Recovery</td>
+      <td>61.70</td>
+      <td>24.05</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>37.41</td>
+      <td>7.13</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>53.49</td>
+      <td>5.80</td>
+      <td>5</td>
+      <td>Yes</td>
+      <td>-24.29</td>
+      <td>0.007990</td>
+      <td>0.017000</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN CONTROL *</span></td>
+      <td>-8.21</td>
+      <td>0.126079</td>
+      <td>0.573769</td>
+      <td>No</td>
+      <td><span style="color: gray;">NOT SIGNIFICANT</span></td>
+      <td>16.08</td>
+      <td>0.007440</td>
+      <td>0.015400</td>
+      <td>Yes</td>
+      <td><span style="color: #b22222; font-weight: bold;">HIGHER IN RECOVERY *</span></td>
+    </tr>
+  </tbody>
+</table></body></html>
