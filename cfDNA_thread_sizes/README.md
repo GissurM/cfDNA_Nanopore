@@ -10,14 +10,8 @@ If performing this analysis on Illumina data or other dsDNA sequencing methods t
 Another thing to watch out for is that if the --no-trim flag is used as parts of both dorado basecall and dorado demux commands you will end up with bam files showing cfDNA threads with 
 barcodes/native adapters on both ends this will cause the lengths to be incorrectly represented. To get around it run the dorado basecall command with the --no-trim flag as the barcode data is still necessary for demux and then run 
 dorado demux without the --no-trim flag, this will ensure your final demultiplexed results will be in the correct sizes. This will also be necessary for other methods detailed in this repository and will generally cause a cleaner dataset for you to use.
-Alternitavely it should be possible to run basecall, demux and alignment in one command line and skip the --no-trim command entirely however I could not get it to work and eventually gave up. If you can get it to work that's great! 
 
-The code itself is fairly simple and does not rely on too many packages. It will output a individual barplot for each bam file in a directory. Like all codes i created for this analysis it was designed to run on a directory of files. 
-If you only have one file simply set the path to the directory that file is contained in and it should work as intended. The code also outputs a comprehensive .csv file which compiles numerical data from all files into a row. 
-Specifically it outputs mean, median and sd both with only fragments sized 100-1000 bp and with all fragments in the file, than it outputs how many threads in each file are representitve of the known thread sizes mono-, di- and trinucleosomal as well as high molecular weight DNA. 
-It also outputs the ratio of the thread sizes in the file. This .csv file is created for easy access to most factors necessary for statistical analysis. Keep in mind that when working with Nanopore the absolute amount of cfDNA threads is often valueless, input amoutn of DNA is highly controlled by the nature of the analysis and is heavily normalized in ideal conditions, 
-therefore the most valuable data to be gathered here is the average size of cfDNA fragments in bp and ratios of cfDNA sizes. The shape of the graph can also be valuable, if you see a sharp mononucleosomal peak and then two more softer mounds for di- and trinuclosomal peaks. The dinucleosomal peak should be slightly higher and the tri nucleosomal is often more spread out. 
-Sometimes a fourth peak is visible possibly representing a tetranucleosomal peak which is a known and interesting phenomenon. 
+The scripts themselves are fairly simple to run first thread_size_analysis.r is used to create individual histograms for each bam file containing information on cfDNA thread sizes. To run this script change  the bam_dir parameter to a path containing bam files and then run the script using R. For a more detailed output run extract_detailed_cfDNA_sizes.py you can do so via a command line "python extract_detailed_cfDNA_sizes.py --bam-dir /your/bam/dir --output-dir /your/output/dir" there are additional parameters you can change but running it like this will be successful alternitively it's possible to change the default directories in the script if preferred. Once this script has finished running you should now have size bins for each of the mains fragment size groups, mono, di, tri and HMW. Run the cfDNA_size_KS_and_MWU.py and cfDNA_size_PCA.py scripts on the output from the previous script to receive interpretable statistics and graphs.
 
 ## Dependencies
 - R studios - version 4.3.3 (this version is tested others may work as well) 
@@ -25,3 +19,10 @@ Sometimes a fourth peak is visible possibly representing a tetranucleosomal peak
     - Rsamtools (v2.18.0)
     - ggplot (v4.0.2)
     - dplyr  (v1.2.0)
+- Python - version 3.9+
+  - pandas (v2.2.3)
+  - numpy (v2.0.2)
+  - scipy (v1.13.1)
+  - sckit-learn (v1.6.1)
+  - pysam (v0.23.0)
+  - seaborn (v0.13.2)
