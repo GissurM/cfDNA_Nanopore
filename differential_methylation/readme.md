@@ -20,6 +20,6 @@ Dependencies:
   - scipy (v1.13.1)
   - matplotlib (v3.9.1)
   - requests (v2.32.5)
-
+  - seaborn (v0.13.2)
 
 
