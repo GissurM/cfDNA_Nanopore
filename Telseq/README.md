@@ -7,10 +7,10 @@ After this run telseq_metadata_intergration.py on the telseq_parser.py output to
 Lastly run telseq_visualization.py in the metadata containing .csv file created using the precvious script. This should generate an output containing several plots and statistics that can be used to interpret the telseq results. For these scripts either paths can be hardcoded into the script by editing the "default" function under each parser or by calling out each path in the command line such as by running "python telseq_parser.py --input-file /path/to/your file --output-csv /intended/output/file/location.csv etc." The telseq_parser.py should work on most datasets, the telseq_metadata_intergration.py script requiers a metadata.csv with information on, age, gender and BMI for your samples so will not be compatible without that information the script will not work without alteration. The telseq_visualization.py script requries output form telseq_metadata_intergration.py so will not work without the full pipeline. Should still be possible to alter it to work with datasets that don't include the metadata.
 
 Dependencies
-TelSeq (v0.0.1)
-GCC (≥v4.8)
-bamtools (v2.5.3)
-python (v3.9+)
+- TelSeq (v0.0.1)
+- GCC (≥v4.8)
+- bamtools (v2.5.3)
+- python (v3.9+)
   - pandas (v2.2.3)
   - numpy (v2.0.2)
   - scipy (v1.13.1)
