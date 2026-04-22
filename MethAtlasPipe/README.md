@@ -29,4 +29,7 @@ This entire pipeline aside from Dorado and modkit to start does not require high
 - Python packages:
     - pandas (v2.2.3) 
     - numpy (v2.0.2)
-    - scikit-learn (v1.6.1) 
+    - scikit-learn (v1.6.1)
+    - seaborn (v0.13.2)
+    - matplotlib (v3.9.1)
+    - scipy (1.13.1)
