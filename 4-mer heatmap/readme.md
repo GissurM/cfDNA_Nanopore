@@ -19,3 +19,5 @@ R (v4.3.3)
 Used for statistics scripts only
   - scipy (v1.13.1)
   - sklearn (v1.6.1)
+  - seaborn (v0.13.2)
+  - matplotlib (v3.9.1)
