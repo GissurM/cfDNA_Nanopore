@@ -14,4 +14,4 @@ A downloadable version of all genomes mentioned above can be found here: https:/
 (When downloading ref. genomes from USCS keep in mind you will be receiveing tar.gz files which are best to unseal using the gunzip command in a Linux environment. If on windows you can use Ubuntu/WSL. Once unzipped the fasta files in the directory are readily accessible in all systems.)
 
 # Dependencies:
-Dorado (v1.3.1) other versions will likely work but the wrapper may require slight alterations
+- Dorado (v1.3.1) other versions will likely work but the wrapper may require slight alterations
